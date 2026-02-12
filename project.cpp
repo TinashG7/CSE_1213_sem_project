@@ -56,7 +56,7 @@ void loadAdmin(vector<Admin>& admin){
   ifstream file("admin.txt");
 
   if (!file){
-    cout <<"Error: admin.txt could not open." <<endl;
+    cout <<"Error: Admin database could not open." <<endl;
   }
 
   Admin temp;
