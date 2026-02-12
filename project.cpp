@@ -87,7 +87,7 @@ void registerConsumer(vector<Meter>& meter){
   
   ofstream file("metersDB.txt");
   if(!file){
-    cout <<"Error: metersDB.txt did not open" <<endl;
+    cout <<"Error: The meters database did not open" <<endl;
   }
 
   Meter temp;
