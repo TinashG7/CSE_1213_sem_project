@@ -146,12 +146,43 @@ void registerConsumer(vector<Meter>& meter){
   temp.meterNo = newMeterNo;
   temp.meterPword = newMeterPword;
   meter.push_back(temp);
-  file <<newMeterNo <<" " <<newMeterPword <<endl;
+  file <<newMeterNo <<" " <<newMeterPword <<" " <<balance <<endl;
   
   file.close();
 }
 
 //Top-up Energy (Deposit)
+void topUpEnergy(vector<Meter>& meter){
+  /**
+  - Admin to input top up units
+  - metersdb.txt to update balance
+  */
+  
+  float topUpUnits;
+  string meterNo;
+
+  cout <<"Enter the meter number ypu would like to top up to:" <<endl;
+  cin >>meterNo;
+
+  // Ensure the entered meter number actually exists
+  bool found=false;
+  int meterIndex=-1;
+
+  for (int i = 0; i < meter.size(); i++){
+    if (meter[i].meterNo==meterNo){
+      found=true;
+      meterIndex=i;
+      break;
+    }
+  }
+
+  if (!found){
+    cout <<"Meter number does not exist. Try again." <<endl;
+  }
+
+  cout <<"Enter the number of units to top up:" <<endl;
+  cin >>topUpUnits;
+}
 
 
 int main() {
