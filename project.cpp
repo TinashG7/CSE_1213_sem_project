@@ -72,20 +72,72 @@ void consumerLogin(){
 
 }
 
+// Load meters function
+void loadMeters(vector<Meter>& meter){
+  ifstream file("metersDB.txt");
+
+  if (!file){
+    cout <<"Error: Metersdatabase could not open." <<endl;
+  }
+
+  Meter temp;
+  while (file >>temp.meterNo >>temp.meterPword){
+      meter.push_back(temp); // add data to the admin vector
+      break;
+  }
+
+  file.close();
+}
+
 // Register new consumer
 void registerConsumer(vector<Meter>& meter){
   /*
   - Meter number
   - Password for new metre/consumer
   */
+ loadMeters(meter);
   string newMeterNo, newMeterPword;
   float balance=50.0;
-  cout <<"Enter the meter number for the new consumer: " <<endl;
-  cin >>newMeterNo;
-  cout <<"Enter the password for the new consumer: " <<endl;
-  cin >>newMeterPword;
+  bool isUnique=false;
+
+  while (!isUnique){
+    cout <<"Enter the meter number for the new consumer: " <<endl;
+    cin >>newMeterNo;
+
+    isUnique=true;
+
+    for (int i = 0; i < meter.size(); i++){
+      if (meter[i].meterNo == newMeterNo){
+        isUnique=false;
+        cout <<"Meter number already exists. Try again." <<endl;
+        break;
+      }
+    }
+
+  }
+
+  // do {
+  //   cout <<"Enter the meter number for the new consumer: " <<endl;
+  //   cin >>newMeterNo;
+
+  //   if (meter){
+      
+  //   }
+
+  // } while (condition);
+
+  // cout <<"Enter the meter number for the new consumer: " <<endl;
+  // cin >>newMeterNo;
+
+  do {
+    cout <<"Enter the password for the new consumer: " <<endl;
+    cin >>newMeterPword;
+    if (newMeterPword.size()<6 || newMeterPword.size()>20){
+    cout <<"Invalid password. Password should be between 6 and 20 characters long." <<endl;
+    }
+  } while (newMeterPword.size()<6 || newMeterPword.size()>20);
   
-  ofstream file("metersDB.txt");
+  ofstream file("metersDB.txt", ios::app);
   if(!file){
     cout <<"Error: The meters database did not open" <<endl;
   }
@@ -94,10 +146,13 @@ void registerConsumer(vector<Meter>& meter){
   temp.meterNo = newMeterNo;
   temp.meterPword = newMeterPword;
   meter.push_back(temp);
-  file <<newMeterNo <<" " <<newMeterPword;
+  file <<newMeterNo <<" " <<newMeterPword <<endl;
   
   file.close();
 }
+
+//Top-up Energy (Deposit)
+
 
 int main() {
   vector<Admin> admin;
