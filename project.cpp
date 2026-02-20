@@ -161,7 +161,7 @@ void topUpEnergy(vector<Meter>& meter){
   float topUpUnits;
   string meterNo;
 
-  cout <<"Enter the meter number ypu would like to top up to:" <<endl;
+  cout <<"Enter the meter number you would like to top up to:" <<endl;
   cin >>meterNo;
 
   // Ensure the entered meter number actually exists
@@ -196,6 +196,46 @@ void viewMeters(vector<Meter>& meter){
 } 
 
 // Function to change admin pword
+void changeAdminPword(vector<Admin>& admin){
+  string oldPword, newPword, loggedInUsername, currentPword;
+
+  // Load the logged-in username from the DB to the vector 
+  int adminIndex=-1;
+  for (int i = 0; i < admin.size(); i++){
+    if (admin[i].adminUsername == loggedInUsername){
+      adminIndex=i;
+      break;
+    }
+  }
+
+  // Enter the new Pword
+  do {
+    do {
+      cout <<"Enter your old password: ";
+      cin >>currentPword;
+      if (currentPword == admin[adminIndex].adminPword){
+        cout <<"Invalid password. Try again." <<endl;
+      }
+    } while (currentPword == admin[adminIndex].adminPword);
+
+    do {
+    cout <<"Enter the new password (6-20 characters): ";
+    cin >>newPword;  
+    if (newPword.size()<6 || newPword.size()>20){
+      cout <<"Invalid password, Must be between 6 and 20 characters." <<endl;
+    }
+    } while (newPword.size()<6 || newPword.size()>20); 
+  
+    // Prevent reusing the same password
+    if (newPword == currentPword){
+    cout <<"New password must be different from the current password." <<endl;
+    }
+  } while (newPword == admin[adminIndex].adminPword);
+
+  // Store it in the vector
+
+  // 
+}
 
 // Function for consumer to log in
 
@@ -211,7 +251,8 @@ int main() {
   loadAdmin(admin);
 
   //registerConsumer(meter);
-  viewMeters(meter);
+  //viewMeters(meter);
+  changeAdminPword(admin);
   
   /*
   int choice;
