@@ -22,9 +22,9 @@ struct Meter{
 
 void adminLogin(vector<Admin>& admin){
   /* TO DO
-  - Enter their username
-  - Enter their password
-  - verify that the username matches the pword
+  - Enter their username - done
+  - Enter their password - done
+  - verify that the username matches the pword - done
   - verify that the username and the pword match what is in the txt file
   */
 
@@ -184,6 +184,18 @@ void topUpEnergy(vector<Meter>& meter){
   cin >>topUpUnits;
 }
 
+// Function to view all meters
+//void 
+
+// Function to change admin pword
+
+// Function for consumer to log in
+
+// Function for consumer to check their balance
+
+// Function for consumer to simulate load
+
+// Fuunction for consumer to change pword
 
 int main() {
   vector<Admin> admin;
