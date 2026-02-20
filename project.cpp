@@ -185,7 +185,15 @@ void topUpEnergy(vector<Meter>& meter){
 }
 
 // Function to view all meters
-//void 
+void viewMeters(vector<Meter>& meter){
+  // load all the meters from the meters DB
+  loadMeters(meter);
+
+  // display all the meters
+  for (int i = 0; i < meter.size(); i++){
+    cout <<meter[i].meterNo <<" " <<meter[i].meterPword <<" " <<meter[i].balance <<endl;
+  }
+} 
 
 // Function to change admin pword
 
@@ -195,14 +203,15 @@ void topUpEnergy(vector<Meter>& meter){
 
 // Function for consumer to simulate load
 
-// Fuunction for consumer to change pword
+// Function for consumer to change pword
 
 int main() {
   vector<Admin> admin;
   vector<Meter> meter;
   loadAdmin(admin);
 
-  registerConsumer(meter);
+  //registerConsumer(meter);
+  viewMeters(meter);
   
   /*
   int choice;
